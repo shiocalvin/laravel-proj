@@ -1,0 +1,107 @@
+@extends('layouts.zone')
+
+@section('content')
+
+<div class="container">
+ <div class="row">   
+<div class="col-sm-3 col-md-3"></div>
+ 
+
+<div class="col-sm-6 col-md-6" style="margin-top: 10%">
+
+<div class="card">
+
+  <div class="card-header text-white" style="background-color: darkred" ><strong>New Hospital</strong></div> 
+  <div class="card-body"> 
+      @include('partials.errors')
+      @include('partials.success')
+
+
+      {{-- <form action="{{ route("center.store") }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="region">Region</label>
+            <select name="region_id" id="region" class="form-control">
+                @foreach($regions as $id => $region)
+                    <option value="{{ $id }}">
+                        {{ $region }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group {{ $errors->has('district_id') ? 'has-error' : '' }}">
+            <label for="district">District</label>
+            <select name="district_id" id="district" class="form-control">
+                <option value="">{{ trans('global.pleaseSelect') }}</option>
+            </select>
+            @if($errors->has('district_id'))
+                <p class="help-block">
+                    {{ $errors->first('district_id') }}
+                </p>
+            @endif
+        </div> --}}
+
+         {{ Form::open([ 'method'=>'post','action'=>'ZoneHospitalController@store'])}}
+
+        <div class="form-group row">
+            {{Form::label('name','Hospital Name:')}}
+            {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Enter Center name' ])}}
+
+        </div>
+
+        
+
+       
+
+        <div class="form-group row">
+            {{Form::label('Region','Region:')}}
+            {{Form::select('region_id',$regionsoptions,null,['class'=>'form-control ' ])}}
+        </div>
+
+        <div class="form-group row">
+            {{Form::label('District','District:')}}
+            {{Form::select('district_id',$districtsoptions,null,['class'=>'form-control' ])}}
+        </div>
+
+        <div class="form-group row">
+            {{Form::label('Ward','Ward:')}}
+            {{Form::select('ward_id',$wardsoptions,null,['class'=>'form-control' ])}}
+        </div>
+
+        {{-- <div class="form-group row">
+            {{Form::label('Position','Position:')}}
+            {{Form::select('position',array('zonaldir'=>'Zonal Director','nbtsdir'=>'Centre Director','nbtslab'=>'Centre Laboratory Technician'),['class'=>'form-control' ])}}
+        </div> --}}
+
+        
+
+        <div class="form-group row float-right">
+        {{Form::submit('Create Hospital',['class'=>'btn text-white float-right','style'=>'background-color:#8b0000'])}}
+
+        </div>
+        {{-- {{Form::hidden('position','zonaldir')}}--}}
+
+        {{Form::hidden('zone_id',$zone->id)}} 
+
+
+        {{Form::close()}} 
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="col-sm-3 col-md-3"></div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+@endsection
+
